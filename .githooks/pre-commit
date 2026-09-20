@@ -1,0 +1,11 @@
+#!/bin/sh
+set -eu
+
+pnpm check:fixtures
+pnpm check:no-live
+
+if command -v gitleaks >/dev/null 2>&1; then
+  gitleaks git --pre-commit --redact
+else
+  echo "gitleaks is not installed; CI remains authoritative for secret scanning." >&2
+fi

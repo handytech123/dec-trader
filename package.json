@@ -1,0 +1,37 @@
+{
+  "name": "autonomous-trading-laboratory",
+  "version": "0.0.0",
+  "private": true,
+  "description": "A safety-first, reproducible trading research laboratory.",
+  "license": "UNLICENSED",
+  "packageManager": "pnpm@11.5.1",
+  "engines": {
+    "node": ">=22.17.0"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "tsc -b --clean",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint . --max-warnings=0",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "check:boundaries": "node scripts/check-workspace-boundaries.mjs",
+    "check:fixtures": "node scripts/verify-fixtures.mjs",
+    "check:no-live": "node scripts/check-no-live-capability.mjs",
+    "check": "pnpm format:check && pnpm lint && pnpm build && pnpm test && pnpm check:boundaries && pnpm check:fixtures && pnpm check:no-live"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "22.18.6",
+    "@vitest/coverage-v8": "4.1.11",
+    "eslint": "10.11.0",
+    "eslint-plugin-security": "4.0.1",
+    "fast-check": "4.3.0",
+    "prettier": "3.6.2",
+    "typescript": "5.9.2",
+    "typescript-eslint": "8.70.0",
+    "vitest": "4.1.11",
+    "zod": "4.1.8"
+  }
+}

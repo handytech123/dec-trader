@@ -1,0 +1,6 @@
+{
+  "fixtureVersion": "1",
+  "provenance": "synthetic",
+  "sanitized": true,
+  "scenarios": ["timeout", "rate-limit", "malformed-response", "stale-quote", "changed-quote"]
+}

@@ -1,0 +1,8 @@
+packages:
+  - "apps/*"
+  - "workers/*"
+  - "packages/*"
+  - "strategies/*"
+
+catalog:
+  zod: 4.1.8

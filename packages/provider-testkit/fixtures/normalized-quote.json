@@ -1,0 +1,20 @@
+{
+  "fixtureVersion": "1",
+  "provenance": "synthetic",
+  "sanitized": true,
+  "scenario": "valid-normalized-quote",
+  "payload": {
+    "quoteId": "quote_01K5J8R4K4F8D8P9Q2Z2T2H3M4",
+    "proposalHash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "quoteHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "inputAtomic": "1000000",
+    "expectedOutputAtomic": "990000",
+    "minimumOutputAtomic": "980100",
+    "priceImpactBps": 25,
+    "estimatedTotalCostBps": 70,
+    "routeProgramLabels": ["SYNTHETIC_DEX"],
+    "expiresAt": "2026-09-19T18:00:00.000Z",
+    "provider": "synthetic",
+    "providerPayloadHash": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+  }
+}

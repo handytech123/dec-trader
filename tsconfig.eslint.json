@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@autonomous-trading-lab/domain": ["packages/domain/src/index.ts"],
+      "@autonomous-trading-lab/execution-contracts": ["packages/execution-contracts/src/index.ts"]
+    }
+  },
+  "include": ["packages/**/*.ts", "vitest.config.ts"]
+}
