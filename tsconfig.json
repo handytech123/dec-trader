@@ -4,6 +4,8 @@
     { "path": "packages/domain" },
     { "path": "packages/execution-contracts" },
     { "path": "packages/strategy-sdk" },
-    { "path": "packages/provider-testkit" }
+    { "path": "packages/provider-testkit" },
+    { "path": "packages/data-foundation" },
+    { "path": "packages/replay" }
   ]
 }

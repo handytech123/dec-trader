@@ -5,7 +5,9 @@
     "baseUrl": ".",
     "paths": {
       "@autonomous-trading-lab/domain": ["packages/domain/src/index.ts"],
-      "@autonomous-trading-lab/execution-contracts": ["packages/execution-contracts/src/index.ts"]
+      "@autonomous-trading-lab/execution-contracts": ["packages/execution-contracts/src/index.ts"],
+      "@autonomous-trading-lab/data-foundation": ["packages/data-foundation/src/index.ts"],
+      "@autonomous-trading-lab/replay": ["packages/replay/src/index.ts"]
     }
   },
   "include": ["packages/**/*.ts", "vitest.config.ts"]

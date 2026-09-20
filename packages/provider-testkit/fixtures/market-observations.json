@@ -1,0 +1,50 @@
+{
+  "fixtureVersion": "1",
+  "provenance": "synthetic",
+  "sanitized": true,
+  "scenario": "ordered-point-in-time-market-observations",
+  "payload": [
+    {
+      "observationId": "observation_01K5J8R4K4F8D8P9Q2Z2T2H3M4",
+      "rawObservationHash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "assetId": "asset_01K5J8R4K4F8D8P9Q2Z2T2H3M4",
+      "poolId": "pool_01K5J8R4K4F8D8P9Q2Z2T2H3M4",
+      "price": "1.000000",
+      "volume": "10000.00",
+      "liquidity": "75000.00",
+      "observedAt": "2026-01-01T12:00:01.000Z",
+      "sourceTime": "2026-01-01T12:00:00.000Z",
+      "slot": "100",
+      "source": "synthetic-market",
+      "schemaVersion": "1"
+    },
+    {
+      "observationId": "observation_01K5J8R4K4F8D8P9Q2Z2T2H3M5",
+      "rawObservationHash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "assetId": "asset_01K5J8R4K4F8D8P9Q2Z2T2H3M4",
+      "poolId": "pool_01K5J8R4K4F8D8P9Q2Z2T2H3M4",
+      "price": "1.020000",
+      "volume": "12000.00",
+      "liquidity": "76000.00",
+      "observedAt": "2026-01-01T12:01:01.000Z",
+      "sourceTime": "2026-01-01T12:01:00.000Z",
+      "slot": "101",
+      "source": "synthetic-market",
+      "schemaVersion": "1"
+    },
+    {
+      "observationId": "observation_01K5J8R4K4F8D8P9Q2Z2T2H3M6",
+      "rawObservationHash": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "assetId": "asset_01K5J8R4K4F8D8P9Q2Z2T2H3M4",
+      "poolId": "pool_01K5J8R4K4F8D8P9Q2Z2T2H3M4",
+      "price": "9.990000",
+      "volume": "999999.00",
+      "liquidity": "999999.00",
+      "observedAt": "2026-01-01T12:03:01.000Z",
+      "sourceTime": "2026-01-01T12:03:00.000Z",
+      "slot": "103",
+      "source": "synthetic-market",
+      "schemaVersion": "1"
+    }
+  ]
+}

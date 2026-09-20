@@ -1,5 +1,5 @@
 {
-  "name": "@autonomous-trading-lab/domain",
+  "name": "@autonomous-trading-lab/replay",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -7,12 +7,9 @@
     ".": "./dist/index.js"
   },
   "types": "./dist/index.d.ts",
-  "scripts": {
-    "build": "tsc -b",
-    "test": "vitest run"
-  },
   "dependencies": {
-    "canonicalize": "catalog:",
+    "@autonomous-trading-lab/data-foundation": "workspace:*",
+    "@autonomous-trading-lab/domain": "workspace:*",
     "zod": "catalog:"
   }
 }

@@ -1,0 +1,23 @@
+{
+  "fixtureVersion": "1",
+  "provenance": "synthetic",
+  "sanitized": true,
+  "scenario": "provider-payload-normalization",
+  "payload": {
+    "observationId": "observation_01K5J8R4K4F8D8P9Q2Z2T2H3M7",
+    "ingestionId": "ingestion_01K5J8R4K4F8D8P9Q2Z2T2H3M4",
+    "source": "synthetic-market",
+    "sourceId": "synthetic-quote-100",
+    "observedAt": "2026-01-01T12:00:01.000Z",
+    "sourceTime": "2026-01-01T12:00:00.000Z",
+    "slot": "100",
+    "schemaVersion": "1",
+    "payload": {
+      "assetMint": "11111111111111111111111111111111",
+      "liquidity": "75000.00",
+      "price": "1.000000",
+      "volume": "10000.00"
+    },
+    "payloadHash": "sha256:6f9f8bf4c8c2327c92071043ddcf2ab8d78bcfa3183427eeb4cdd2f44ca68a4b"
+  }
+}

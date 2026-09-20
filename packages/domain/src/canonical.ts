@@ -1,12 +1,11 @@
 import { createHash } from "node:crypto";
+import canonicalize from "canonicalize";
 
-function normalize(value: unknown): unknown {
-  if (Array.isArray(value)) return value.map(normalize);
+function jsonCompatible(value: unknown): unknown {
+  if (Array.isArray(value)) return value.map(jsonCompatible);
   if (value !== null && typeof value === "object") {
     return Object.fromEntries(
-      Object.entries(value)
-        .sort(([left], [right]) => left.localeCompare(right))
-        .map(([key, item]) => [key, normalize(item)]),
+      Object.entries(value).map(([key, item]) => [key, jsonCompatible(item)]),
     );
   }
   if (typeof value === "bigint") return value.toString(10);
@@ -18,7 +17,9 @@ function normalize(value: unknown): unknown {
 }
 
 export function canonicalJson(value: unknown): string {
-  return JSON.stringify(normalize(value));
+  const result = canonicalize(jsonCompatible(value));
+  if (result === undefined) throw new TypeError("value cannot be represented as canonical JSON");
+  return result;
 }
 
 export function contentHash(value: unknown): `sha256:${string}` {

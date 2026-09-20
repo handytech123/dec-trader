@@ -6,6 +6,9 @@ settings:
 
 catalogs:
   default:
+    canonicalize:
+      specifier: 5.1.0
+      version: 5.1.0
     zod:
       specifier: 4.1.8
       version: 4.1.8
@@ -14,6 +17,9 @@ importers:
 
   .:
     devDependencies:
+      '@electric-sql/pglite':
+        specifier: 0.5.8
+        version: 0.5.8
       '@eslint/js':
         specifier: 10.0.1
         version: 10.0.1(eslint@10.11.0)
@@ -48,8 +54,20 @@ importers:
         specifier: 4.1.8
         version: 4.1.8
 
+  packages/data-foundation:
+    dependencies:
+      '@autonomous-trading-lab/domain':
+        specifier: workspace:*
+        version: link:../domain
+      zod:
+        specifier: 'catalog:'
+        version: 4.1.8
+
   packages/domain:
     dependencies:
+      canonicalize:
+        specifier: 'catalog:'
+        version: 5.1.0
       zod:
         specifier: 'catalog:'
         version: 4.1.8
@@ -68,6 +86,18 @@ importers:
       '@autonomous-trading-lab/execution-contracts':
         specifier: workspace:*
         version: link:../execution-contracts
+
+  packages/replay:
+    dependencies:
+      '@autonomous-trading-lab/data-foundation':
+        specifier: workspace:*
+        version: link:../data-foundation
+      '@autonomous-trading-lab/domain':
+        specifier: workspace:*
+        version: link:../domain
+      zod:
+        specifier: 'catalog:'
+        version: 4.1.8
 
   packages/strategy-sdk:
     dependencies:
@@ -103,6 +133,9 @@ packages:
 
   '@cacheable/utils@2.5.0':
     resolution: {integrity: sha512-buipgOVDkkPXNR5+xBpDw7Zk2n1EvU7qBJCNUcL7rhQ//kfpOXPAvQ511Os0vpLYJ1pZnvudNytkQt2hst3wqA==}
+
+  '@electric-sql/pglite@0.5.8':
+    resolution: {integrity: sha512-n9tsbUOhwx2epK1V0ZG9Ar4SHWUju04dhmzZXiSBXwBoleOvIfals33NAaWgagQVAL4Rbvx/Ptsu3P+pA09f6Q==}
 
   '@esbuild/aix-ppc64@0.28.2':
     resolution: {integrity: sha512-XExcO+dvLKvVtNTibSTBej1NCAbaGhWn9Ww1ZPx80qsahhPFe/8jgWP0IchNe0F3HwkU7n8ejhH8bjonqht8mQ==}
@@ -632,6 +665,11 @@ packages:
   cacheable@2.5.0:
     resolution: {integrity: sha512-60cyAOytib/OzBw1JNSoSV/boK1AtHryDIjvVBk7XbN4ugfkM3+Sry7fEjNgPMGgOjuaZPAp8ruZ0Cxafwyq9g==}
 
+  canonicalize@5.1.0:
+    resolution: {integrity: sha512-bab9+WefZljqQ8jT0qRwVmTyzAUU63K97QIQD3agynIBrb6sa5M2eAy8Hv8K3p4V9+ONVYZKtGYl4Dg+/5Gumw==}
+    engines: {node: '>=22'}
+    hasBin: true
+
   chai@6.2.2:
     resolution: {integrity: sha512-NUPRluOfOiTKBKvWPtSD4PhFvWCqOi0BGStNWs57X9js7XGTprSmFoz5F0tWhR4WPjNeR9jXqdC7/UpSJTnlRg==}
     engines: {node: '>=18'}
@@ -1135,6 +1173,8 @@ snapshots:
       hashery: 1.5.1
       keyv: 5.6.0
 
+  '@electric-sql/pglite@0.5.8': {}
+
   '@esbuild/aix-ppc64@0.28.2':
     optional: true
 
@@ -1557,6 +1597,8 @@ snapshots:
       hookified: 1.15.1
       keyv: 5.6.0
       qified: 0.10.1
+
+  canonicalize@5.1.0: {}
 
   chai@6.2.2: {}
 
