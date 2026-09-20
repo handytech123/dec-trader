@@ -7,8 +7,8 @@ settings:
 catalogs:
   default:
     zod:
-      specifier: 4.1.8
-      version: 4.1.8
+      specifier: 4.6.5
+      version: 4.6.5
 
 importers:
 
@@ -52,7 +52,7 @@ importers:
     dependencies:
       zod:
         specifier: 'catalog:'
-        version: 4.1.8
+        version: 4.6.5
 
   packages/execution-contracts:
     dependencies:
@@ -61,7 +61,7 @@ importers:
         version: link:../domain
       zod:
         specifier: 'catalog:'
-        version: 4.1.8
+        version: 4.6.5
 
   packages/provider-testkit:
     dependencies:
@@ -1106,6 +1106,9 @@ packages:
   zod@4.1.8:
     resolution: {integrity: sha512-5R1P+WwQqmmMIEACyzSvo4JXHY5WiAFHRMg+zBZKgKS+Q1viRa0C1hmUKtHltoIFKtIdki3pRxkmpP74jnNYHQ==}
 
+  zod@4.6.5:
+    resolution: {integrity: sha512-v5l/aFXZQeai4awLbOpSoHecE9UiMrnfx75tEXLjNonXVARxQ5mOeipTjROUchszUNCqnE+hqAMujRsRHsut2Q==}
+
 snapshots:
 
   '@babel/helper-string-parser@7.29.7': {}
@@ -1998,3 +2001,5 @@ snapshots:
   yocto-queue@0.1.0: {}
 
   zod@4.1.8: {}
+
+  zod@4.6.5: {}
