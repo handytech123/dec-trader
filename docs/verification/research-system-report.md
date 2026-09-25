@@ -15,7 +15,8 @@ Date: 2026-09-24
 - Credential-free holder-count, top-holder concentration, verification, suspicious-token, and
   organic-activity evidence.
 - Deterministic paper fills, cost and latency stress, metrics, and walk-forward splits.
-- A five-minute recurring collector that also refreshes safety and data-health reporting.
+- One-shot collection, safety, route, integrity, shadow, and data-health commands suitable for a
+  future five-minute scheduler. No durable scheduler is installed by this repository.
 - An append-only shadow-decision ledger and one-hour paper-position cycle with 100 bps costs on both
   entry and exit.
 - A repository guard that rejects live wallet and transaction capabilities.
