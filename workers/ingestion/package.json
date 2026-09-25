@@ -1,0 +1,28 @@
+{
+  "name": "@autonomous-trading-lab/ingestion",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "collect": "node dist/cli.js",
+    "discover": "node dist/discover-cli.js",
+    "inspect:safety": "node dist/safety-cli.js",
+    "report:data": "node dist/report-cli.js",
+    "shadow": "node dist/shadow-cli.js",
+    "inspect:routes": "node dist/routes-cli.js",
+    "inspect:integrity": "node dist/integrity-cli.js"
+  },
+  "dependencies": {
+    "@autonomous-trading-lab/data-foundation": "workspace:*",
+    "@autonomous-trading-lab/domain": "workspace:*",
+    "@autonomous-trading-lab/market-research": "workspace:*",
+    "@autonomous-trading-lab/token-safety": "workspace:*",
+    "@electric-sql/pglite": "0.5.8",
+    "decimal.js": "catalog:",
+    "zod": "catalog:"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "version": "1",
+  "chain": "solana",
+  "assets": [
+    {
+      "mint": "So11111111111111111111111111111111111111112",
+      "symbol": "WSOL",
+      "category": "layer-1",
+      "marketCapTier": "large",
+      "researchRole": "BENCHMARK"
+    }
+  ]
+}

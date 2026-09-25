@@ -7,8 +7,18 @@
       "@autonomous-trading-lab/domain": ["packages/domain/src/index.ts"],
       "@autonomous-trading-lab/execution-contracts": ["packages/execution-contracts/src/index.ts"],
       "@autonomous-trading-lab/data-foundation": ["packages/data-foundation/src/index.ts"],
-      "@autonomous-trading-lab/replay": ["packages/replay/src/index.ts"]
+      "@autonomous-trading-lab/replay": ["packages/replay/src/index.ts"],
+      "@autonomous-trading-lab/backtest": ["packages/backtest/src/index.ts"],
+      "@autonomous-trading-lab/market-research": ["packages/market-research/src/index.ts"],
+      "@autonomous-trading-lab/token-safety": ["packages/token-safety/src/index.ts"],
+      "@autonomous-trading-lab/ingestion": ["workers/ingestion/src/index.ts"]
     }
   },
-  "include": ["packages/**/*.ts", "vitest.config.ts"]
+  "include": [
+    "apps/**/*.ts",
+    "packages/**/*.ts",
+    "strategies/**/*.ts",
+    "workers/**/*.ts",
+    "vitest.config.ts"
+  ]
 }

@@ -1,0 +1,15 @@
+{
+  "name": "@autonomous-trading-lab/backtest",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "@autonomous-trading-lab/domain": "workspace:*",
+    "decimal.js": "catalog:",
+    "zod": "catalog:"
+  }
+}

@@ -9,6 +9,9 @@ catalogs:
     canonicalize:
       specifier: 5.1.0
       version: 5.1.0
+    decimal.js:
+      specifier: 10.6.0
+      version: 10.6.0
     zod:
       specifier: 4.1.8
       version: 4.1.8
@@ -29,6 +32,9 @@ importers:
       '@vitest/coverage-v8':
         specifier: 4.1.11
         version: 4.1.11(vitest@4.1.11)
+      decimal.js:
+        specifier: 10.6.0
+        version: 10.6.0
       eslint:
         specifier: 10.11.0
         version: 10.11.0
@@ -52,6 +58,24 @@ importers:
         version: 4.1.11(@types/node@22.18.6)(@vitest/coverage-v8@4.1.11)(vite@7.3.6(@types/node@22.18.6))
       zod:
         specifier: 4.1.8
+        version: 4.1.8
+
+  apps/dashboard:
+    dependencies:
+      '@autonomous-trading-lab/ingestion':
+        specifier: workspace:*
+        version: link:../../workers/ingestion
+
+  packages/backtest:
+    dependencies:
+      '@autonomous-trading-lab/domain':
+        specifier: workspace:*
+        version: link:../domain
+      decimal.js:
+        specifier: 'catalog:'
+        version: 10.6.0
+      zod:
+        specifier: 'catalog:'
         version: 4.1.8
 
   packages/data-foundation:
@@ -81,6 +105,15 @@ importers:
         specifier: 'catalog:'
         version: 4.1.8
 
+  packages/market-research:
+    dependencies:
+      '@autonomous-trading-lab/domain':
+        specifier: workspace:*
+        version: link:../domain
+      decimal.js:
+        specifier: 'catalog:'
+        version: 10.6.0
+
   packages/provider-testkit:
     dependencies:
       '@autonomous-trading-lab/execution-contracts':
@@ -104,6 +137,42 @@ importers:
       '@autonomous-trading-lab/domain':
         specifier: workspace:*
         version: link:../domain
+
+  packages/token-safety:
+    dependencies:
+      '@autonomous-trading-lab/domain':
+        specifier: workspace:*
+        version: link:../domain
+
+  strategies/reference:
+    dependencies:
+      '@autonomous-trading-lab/domain':
+        specifier: workspace:*
+        version: link:../../packages/domain
+
+  workers/ingestion:
+    dependencies:
+      '@autonomous-trading-lab/data-foundation':
+        specifier: workspace:*
+        version: link:../../packages/data-foundation
+      '@autonomous-trading-lab/domain':
+        specifier: workspace:*
+        version: link:../../packages/domain
+      '@autonomous-trading-lab/market-research':
+        specifier: workspace:*
+        version: link:../../packages/market-research
+      '@autonomous-trading-lab/token-safety':
+        specifier: workspace:*
+        version: link:../../packages/token-safety
+      '@electric-sql/pglite':
+        specifier: 0.5.8
+        version: 0.5.8
+      decimal.js:
+        specifier: 'catalog:'
+        version: 10.6.0
+      zod:
+        specifier: 'catalog:'
+        version: 4.1.8
 
 packages:
 
@@ -689,6 +758,9 @@ packages:
     peerDependenciesMeta:
       supports-color:
         optional: true
+
+  decimal.js@10.6.0:
+    resolution: {integrity: sha512-YpgQiITW3JXGntzdUmyUR1V812Hn8T1YVXhCu+wO3OpS4eU9l4YdD3qjyiKdV6mvV29zapkMeD390UVEf2lkUg==}
 
   deep-is@0.1.4:
     resolution: {integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==}
@@ -1613,6 +1685,8 @@ snapshots:
   debug@4.4.3:
     dependencies:
       ms: 2.1.3
+
+  decimal.js@10.6.0: {}
 
   deep-is@0.1.4: {}
 

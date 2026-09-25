@@ -13,6 +13,6 @@ export default defineConfig({
       ],
       thresholds: { lines: 85, functions: 85, branches: 80, statements: 85 },
     },
-    include: ["packages/**/test/**/*.test.ts"],
+    include: ["packages/**/test/**/*.test.ts", "workers/**/test/**/*.test.ts"],
   },
 });

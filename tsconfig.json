@@ -6,6 +6,12 @@
     { "path": "packages/strategy-sdk" },
     { "path": "packages/provider-testkit" },
     { "path": "packages/data-foundation" },
-    { "path": "packages/replay" }
+    { "path": "packages/replay" },
+    { "path": "packages/backtest" },
+    { "path": "packages/market-research" },
+    { "path": "packages/token-safety" },
+    { "path": "strategies/reference" },
+    { "path": "workers/ingestion" },
+    { "path": "apps/dashboard" }
   ]
 }

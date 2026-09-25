@@ -1,4 +1,8 @@
-# Owner dashboard boundary
+# DEX research dashboard
 
-Reserved for the owner interface. It must never receive signer credentials or wallet key material.
-Authentication and deployment remain open decisions before Phase 1 completion.
+Read-only owner interface for the local research database. It exposes no wallet, signing, funding,
+or transaction-submission capability and binds to `127.0.0.1` by default.
+
+Run `pnpm dashboard` from the repository root, then open `http://127.0.0.1:4173`.
+
+The browser refreshes the research report every 15 seconds from `.atl-data/research-db`.

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <title>DEX Research Lab</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside>
+        <div class="brand"><b>D</b><span>DEX Lab</span></div>
+        <nav>
+          <a href="#overview" class="active">Overview</a><a href="#candidates">Candidates</a
+          ><a href="#positions">Paper positions</a><a href="#health">Data health</a>
+        </nav>
+        <div class="safe">
+          <i></i>
+          <div><strong>Research only</strong><small>No live execution</small></div>
+        </div>
+      </aside>
+      <main>
+        <header>
+          <div>
+            <p class="eyebrow">AUTONOMOUS TRADING LABORATORY</p>
+            <h1>Research command center</h1>
+          </div>
+          <div class="actions">
+            <span id="updated">Loading current report…</span
+            ><button id="refresh">Refresh data</button>
+          </div>
+        </header>
+        <div id="error" class="error" role="alert" hidden></div>
+        <section id="overview">
+          <div class="heading">
+            <div>
+              <p class="eyebrow">CURRENT STATE</p>
+              <h2>Phase 3 · Shadow validation</h2>
+            </div>
+            <span id="mode" class="mode">RESEARCH_ONLY</span>
+          </div>
+          <div class="phases" aria-label="Project phase progress">
+            <div class="phase done"><b>0</b><small>Foundation</small></div>
+            <div class="phase done"><b>1</b><small>Data</small></div>
+            <div class="phase done"><b>2</b><small>Paper</small></div>
+            <div class="phase now"><b>3</b><small>Shadow</small></div>
+            <div class="phase"><b>4</b><small>Risk sandbox</small></div>
+            <div class="phase"><b>5</b><small>Canary ready</small></div>
+            <div class="phase"><b>6</b><small>Funded test</small></div>
+          </div>
+          <div id="metrics" class="metrics"></div>
+        </section>
+        <section id="candidates">
+          <div class="heading">
+            <div>
+              <p class="eyebrow">RANKED UNIVERSE</p>
+              <h2>Candidate intelligence</h2>
+            </div>
+            <div class="filters">
+              <button class="filter active" data-filter="all">All</button
+              ><button class="filter" data-filter="RESEARCH_ELIGIBLE">Eligible</button
+              ><button class="filter" data-filter="EXCLUDED">Excluded</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Asset</th>
+                  <th>Category</th>
+                  <th>Decision</th>
+                  <th>Gates</th>
+                  <th>Liquidity</th>
+                  <th>24h volume</th>
+                  <th>1h</th>
+                  <th>Route cost</th>
+                </tr>
+              </thead>
+              <tbody id="candidate-rows"></tbody>
+            </table>
+          </div>
+        </section>
+        <section id="positions">
+          <div class="heading">
+            <div>
+              <p class="eyebrow">SIMULATED CAPITAL</p>
+              <h2>Paper positions</h2>
+            </div>
+            <span class="muted">100 bps modeled each side</span>
+          </div>
+          <div id="positions-grid" class="position-grid"></div>
+        </section>
+        <section id="health">
+          <div class="heading">
+            <div>
+              <p class="eyebrow">PIPELINE</p>
+              <h2>Data health</h2>
+            </div>
+          </div>
+          <div class="health-layout">
+            <div id="health-grid" class="health-grid"></div>
+            <div class="panel">
+              <h3>Safety distribution</h3>
+              <div id="safety-bars"></div>
+              <p id="errors" class="footnote"></p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

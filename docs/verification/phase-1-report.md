@@ -18,20 +18,23 @@
 | Identical-input exit        | Input permutation produces byte-identical result              | Reproducibility test |
 | No later-phase capability   | Existing prohibited-capability guard                          | `pnpm check:no-live` |
 
-## Open decisions intentionally unresolved
+## Owner decisions
 
 - RPC/indexing provider and retention/cost profile.
 - Historical point-in-time liquidity and holder-data sources.
 - Exact wallet-quality methodology and manipulation controls.
 - Tax-lot/export requirements.
 
-These do not affect fixture-based Phase 1 reproducibility and are not guessed here.
+The owner approved the researched recommendation bundle on 2026-09-25. ADR 0007 records every
+Section 22 decision and preserves the later credential, custody, external-review, shadow-run, and
+live-activation gates.
 
 ## Results
 
 - Frozen install with dependency lifecycle scripts disabled: passed.
 - Format, ESLint, and strict TypeScript build: passed.
-- Tests: 46 passed across 7 files.
+- Original Phase 1 tests: 46 passed across 7 files. Repository regression suite on 2026-09-25: 75
+  passed across 13 files.
 - Runtime coverage: 94.4% statements, 84.9% branches, 88.23% functions, 95.79% lines.
 - Deterministic replay: identical recorded inputs in different input order produced identical
   proposals, input hashes, proposal hashes, and replay hashes.

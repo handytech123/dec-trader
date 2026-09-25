@@ -3,7 +3,15 @@ import security from "eslint-plugin-security";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-  { ignores: ["**/dist/**", "**/coverage/**", "**/node_modules/**"] },
+  {
+    ignores: [
+      "**/dist/**",
+      "**/coverage/**",
+      "**/node_modules/**",
+      "crypto-eval-review/**",
+      ".codex-remote-attachments/**",
+    ],
+  },
   eslint.configs.recommended,
   ...tseslint.configs.strictTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
@@ -30,5 +38,16 @@ export default tseslint.config(
       ...tseslint.configs.disableTypeChecked.rules,
       "security/detect-non-literal-fs-filename": "off",
     },
+  },
+  {
+    files: ["apps/dashboard/public/**/*.js"],
+    languageOptions: {
+      globals: {
+        document: "readonly",
+        fetch: "readonly",
+        setInterval: "readonly",
+      },
+    },
+    rules: { "security/detect-object-injection": "off" },
   },
 );

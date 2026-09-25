@@ -1,0 +1,12 @@
+{
+  "name": "@autonomous-trading-lab/dashboard",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node dist/server.js"
+  },
+  "dependencies": {
+    "@autonomous-trading-lab/ingestion": "workspace:*"
+  }
+}
