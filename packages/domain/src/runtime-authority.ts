@@ -1,0 +1,14 @@
+export const runtimeAuthority = Object.freeze({
+  manifestVersion: "1",
+  authority: "READ_ONLY_RESEARCH",
+  chain_read: true,
+  market_read: true,
+  wallet_read: false,
+  signing: false,
+  transaction_submit: false,
+  exchange_trade: false,
+  withdrawal: false,
+  capital_allocation: false,
+} as const);
+
+export type RuntimeAuthority = typeof runtimeAuthority;

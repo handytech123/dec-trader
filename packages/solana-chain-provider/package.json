@@ -1,0 +1,14 @@
+{
+  "name": "@autonomous-trading-lab/solana-chain-provider",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "@autonomous-trading-lab/provider-sdk": "workspace:*",
+    "zod": "catalog:"
+  }
+}

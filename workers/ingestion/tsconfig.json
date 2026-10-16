@@ -3,9 +3,21 @@
   "compilerOptions": { "composite": true, "rootDir": "src", "outDir": "dist" },
   "include": ["src/**/*.ts"],
   "references": [
+    { "path": "../../packages/backtest" },
+    { "path": "../../packages/binance-market-provider" },
     { "path": "../../packages/domain" },
+    { "path": "../../packages/capital-flow" },
+    { "path": "../../packages/coinbase-market-provider" },
+    { "path": "../../packages/coinglass-provider" },
     { "path": "../../packages/data-foundation" },
+    { "path": "../../packages/evidence" },
+    { "path": "../../packages/enrichment" },
     { "path": "../../packages/market-research" },
-    { "path": "../../packages/token-safety" }
+    { "path": "../../packages/nansen-provider" },
+    { "path": "../../packages/token-safety" },
+    { "path": "../../packages/provider-sdk" },
+    { "path": "../../packages/solana-chain-provider" },
+    { "path": "../../packages/solana-normalization" },
+    { "path": "../../packages/strategy-sdk" }
   ]
 }

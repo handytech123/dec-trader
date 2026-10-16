@@ -6,12 +6,35 @@
     "paths": {
       "@autonomous-trading-lab/domain": ["packages/domain/src/index.ts"],
       "@autonomous-trading-lab/execution-contracts": ["packages/execution-contracts/src/index.ts"],
+      "@autonomous-trading-lab/provider-sdk": ["packages/provider-sdk/src/index.ts"],
+      "@autonomous-trading-lab/solana-chain-provider": [
+        "packages/solana-chain-provider/src/index.ts"
+      ],
+      "@autonomous-trading-lab/solana-normalization": [
+        "packages/solana-normalization/src/index.ts"
+      ],
+      "@autonomous-trading-lab/evidence": ["packages/evidence/src/index.ts"],
+      "@autonomous-trading-lab/order-flow": ["packages/order-flow/src/index.ts"],
+      "@autonomous-trading-lab/coinbase-market-provider": [
+        "packages/coinbase-market-provider/src/index.ts"
+      ],
+      "@autonomous-trading-lab/binance-market-provider": [
+        "packages/binance-market-provider/src/index.ts"
+      ],
+      "@autonomous-trading-lab/pyth-price-provider": ["packages/pyth-price-provider/src/index.ts"],
+      "@autonomous-trading-lab/nansen-provider": ["packages/nansen-provider/src/index.ts"],
+      "@autonomous-trading-lab/coinglass-provider": ["packages/coinglass-provider/src/index.ts"],
+      "@autonomous-trading-lab/enrichment": ["packages/enrichment/src/index.ts"],
       "@autonomous-trading-lab/data-foundation": ["packages/data-foundation/src/index.ts"],
       "@autonomous-trading-lab/replay": ["packages/replay/src/index.ts"],
       "@autonomous-trading-lab/backtest": ["packages/backtest/src/index.ts"],
       "@autonomous-trading-lab/market-research": ["packages/market-research/src/index.ts"],
+      "@autonomous-trading-lab/capital-flow": ["packages/capital-flow/src/index.ts"],
       "@autonomous-trading-lab/token-safety": ["packages/token-safety/src/index.ts"],
-      "@autonomous-trading-lab/ingestion": ["workers/ingestion/src/index.ts"]
+      "@autonomous-trading-lab/trading-agents": ["packages/trading-agents/src/index.ts"],
+      "@autonomous-trading-lab/ingestion": ["workers/ingestion/src/index.ts"],
+      "@autonomous-trading-lab/strategy-worker": ["workers/strategy/src/index.ts"],
+      "@autonomous-trading-lab/trading-worker": ["workers/trading/src/index.ts"]
     }
   },
   "include": [

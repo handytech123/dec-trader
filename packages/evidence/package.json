@@ -1,0 +1,17 @@
+{
+  "name": "@autonomous-trading-lab/evidence",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "@autonomous-trading-lab/capital-flow": "workspace:*",
+    "@autonomous-trading-lab/domain": "workspace:*",
+    "@autonomous-trading-lab/provider-sdk": "workspace:*",
+    "@autonomous-trading-lab/solana-normalization": "workspace:*",
+    "zod": "catalog:"
+  }
+}

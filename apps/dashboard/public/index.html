@@ -12,7 +12,8 @@
       <aside>
         <div class="brand"><b>D</b><span>DEX Lab</span></div>
         <nav>
-          <a href="#overview" class="active">Overview</a><a href="#candidates">Candidates</a
+          <a href="#overview" class="active">Overview</a><a href="#progress">Live progress</a
+          ><a href="#cfie">Capital flow</a><a href="#candidates">Candidates</a
           ><a href="#positions">Paper positions</a><a href="#health">Data health</a>
         </nav>
         <div class="safe">
@@ -32,6 +33,71 @@
           </div>
         </header>
         <div id="error" class="error" role="alert" hidden></div>
+        <section id="progress" class="progress-section">
+          <div class="heading">
+            <div>
+              <p class="eyebrow">LIVE OPERATIONS</p>
+              <h2>Observation progress</h2>
+            </div>
+            <span id="collector-badge" class="mode">CHECKING</span>
+          </div>
+          <div id="progress-summary" class="status-banner"></div>
+          <div id="operations-health" class="metrics"></div>
+          <div id="research-readiness" class="metrics"></div>
+          <p class="readiness-guidance">
+            Collection target: 14 uninterrupted days minimum; 30 days preferred before judging
+            economic usefulness. Software expansion is intentionally paused while evidence matures.
+          </p>
+          <div class="progress-layout">
+            <div class="panel">
+              <div class="panel-heading">
+                <h3>Research-horizon maturation</h3>
+                <span class="muted">Outcomes / market reactions</span>
+              </div>
+              <div id="horizon-progress" class="horizon-list"></div>
+            </div>
+            <div class="panel">
+              <div class="panel-heading">
+                <h3>Pipeline checklist</h3>
+                <span class="muted">Current database</span>
+              </div>
+              <div id="pipeline-checklist" class="check-list"></div>
+              <div class="section-label">Feed incidents · last hour</div>
+              <div id="incident-summary" class="check-list"></div>
+            </div>
+          </div>
+        </section>
+        <section id="paper-lab">
+          <div class="heading">
+            <div>
+              <p class="eyebrow">PAPER LABORATORY</p>
+              <h2>Regime-aware strategy team</h2>
+            </div>
+            <span class="mode">PAPER_ONLY</span>
+          </div>
+          <div id="paper-lab-metrics" class="metrics"></div>
+          <div class="progress-layout">
+            <div class="panel">
+              <div class="panel-heading"><h3>Style library</h3></div>
+              <div id="paper-style-library" class="event-list"></div>
+            </div>
+            <div class="panel">
+              <div class="panel-heading"><h3>Latest coordinator decision</h3></div>
+              <div id="paper-lab-decision" class="check-list"></div>
+            </div>
+          </div>
+        </section>
+        <section id="trading-bots">
+          <div class="heading">
+            <div>
+              <p class="eyebrow">RESPONSIBILITY-SEPARATED BOTS</p>
+              <h2>Continuous shadow decision chain</h2>
+            </div>
+            <span class="mode">PAPER ONLY · NO EXECUTION</span>
+          </div>
+          <div id="trading-bot-metrics" class="metrics"></div>
+          <div id="trading-bot-status" class="health-grid"></div>
+        </section>
         <section id="overview">
           <div class="heading">
             <div>
@@ -50,6 +116,153 @@
             <div class="phase"><b>6</b><small>Funded test</small></div>
           </div>
           <div id="metrics" class="metrics"></div>
+        </section>
+        <section id="cfie">
+          <div class="heading">
+            <div>
+              <p class="eyebrow">CAPITAL FLOW INTELLIGENCE</p>
+              <h2>Read-only observation pipeline</h2>
+            </div>
+            <span class="mode">NO EXECUTION AUTHORITY</span>
+          </div>
+          <div id="cfie-metrics" class="metrics"></div>
+          <div class="panel filtered-alert-panel">
+            <div class="panel-heading">
+              <h3>Helius watched-entity alerts</h3>
+              <span class="muted">Finality → canonical transfers → market outcomes</span>
+            </div>
+            <div class="alert-controls" aria-label="Alert display controls">
+              <label
+                >Direction<select id="alert-direction-filter">
+                  <option value="ALL">All directions</option>
+                  <option value="EXCHANGE_INFLOW">Exchange inflows</option>
+                  <option value="EXCHANGE_OUTFLOW">Exchange outflows</option>
+                  <option value="PROTOCOL_INTERACTION">Protocol activity</option>
+                  <option value="INTO_BRIDGE">Into bridges</option>
+                  <option value="OUT_OF_BRIDGE">Out of bridges</option>
+                  <option value="UNCLASSIFIED_TRANSFER">Unclassified</option>
+                </select></label
+              >
+              <label
+                >Wallet behavior<select id="alert-anomaly-filter">
+                  <option value="ALL">All behavior</option>
+                  <option value="ANOMALOUS">Unusual only</option>
+                  <option value="HISTORY_READY">History-ready only</option>
+                </select></label
+              >
+              <label
+                >Sort<select id="alert-sort">
+                  <option value="QUALITY">Highest quality</option>
+                  <option value="NEWEST">Newest</option>
+                  <option value="OUTCOME">Most evidence</option>
+                </select></label
+              >
+              <button id="alert-export" class="secondary" type="button">Export CSV</button>
+            </div>
+            <p id="alert-result-count" class="muted alert-result-count"></p>
+            <div id="filtered-alerts" class="event-list">
+              <p class="empty">Loading filtered alerts…</p>
+            </div>
+          </div>
+          <div class="cfie-layout">
+            <div class="panel">
+              <h3>Recent capital events</h3>
+              <div id="capital-events" class="event-list"></div>
+            </div>
+            <div class="panel">
+              <h3>Independent capital-flow episodes</h3>
+              <div id="capital-flow-episodes" class="event-list"></div>
+            </div>
+            <div class="panel">
+              <h3>Coinbase SOL-USD observations</h3>
+              <div id="market-events" class="event-list"></div>
+            </div>
+            <div class="panel">
+              <h3>Unified observation timeline</h3>
+              <div id="unified-timeline" class="event-list"></div>
+            </div>
+            <div class="panel">
+              <h3>Evidence packets</h3>
+              <div id="evidence-packets" class="event-list"></div>
+            </div>
+            <div class="panel">
+              <h3>Reference-price confidence</h3>
+              <div id="reference-prices" class="event-list"></div>
+            </div>
+            <div class="panel">
+              <h3>Research results</h3>
+              <div id="research-runs" class="event-list"></div>
+            </div>
+            <div class="panel">
+              <h3>Directional outcome cohorts</h3>
+              <div id="directional-outcomes" class="event-list"></div>
+            </div>
+          </div>
+          <div id="queue-health" class="queue-health"></div>
+          <div class="heading subheading">
+            <div>
+              <p class="eyebrow">ENTITY INTELLIGENCE</p>
+              <h3>Point-in-time attribution coverage</h3>
+            </div>
+          </div>
+          <div id="attribution-status" class="health-grid"></div>
+          <div id="owner-correction-status" class="health-grid compact-health"></div>
+          <div class="heading subheading">
+            <div>
+              <p class="eyebrow">PROTOCOL FLOW</p>
+              <h3>PumpSwap fee activity research</h3>
+            </div>
+          </div>
+          <div id="protocol-flow-status" class="health-grid"></div>
+          <div id="protocol-research-status" class="health-grid compact-health"></div>
+          <div class="heading subheading">
+            <div>
+              <p class="eyebrow">PHASE 2 EDGE DISCOVERY</p>
+              <h3>Bounded exploratory research ledger</h3>
+            </div>
+            <span class="muted">Research candidates · not trade recommendations</span>
+          </div>
+          <div id="phase-two-status" class="health-grid"></div>
+          <p id="phase-two-note" class="footnote"></p>
+          <div id="wallet-coverage-status" class="health-grid compact-health"></div>
+          <div class="heading subheading">
+            <div>
+              <p class="eyebrow">OPTIONAL ENRICHMENT</p>
+              <h3>Nansen point-in-time enrichment</h3>
+            </div>
+            <span class="muted">Nansen first · CoinGlass disabled · never canonical truth</span>
+          </div>
+          <div id="enrichment-status" class="health-grid compact-health"></div>
+          <div id="enrichment-capabilities" class="event-list"></div>
+          <div id="phase-two-attempts" class="event-list"></div>
+          <div class="heading subheading">
+            <div>
+              <p class="eyebrow">VERIFICATION QUEUE</p>
+              <h3>High-activity endpoints awaiting evidence</h3>
+            </div>
+            <span class="muted">Behavior only · no inferred identities</span>
+          </div>
+          <div class="table-wrap">
+            <table class="entity-table">
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Address</th>
+                  <th>Observed behavior</th>
+                  <th>Events</th>
+                  <th>Counterparties</th>
+                  <th>Identity</th>
+                  <th>Review</th>
+                </tr>
+              </thead>
+              <tbody id="entity-candidate-rows">
+                <tr>
+                  <td colspan="7" class="empty">Loading verification queue…</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p id="entity-candidate-note" class="footnote"></p>
         </section>
         <section id="candidates">
           <div class="heading">
@@ -109,6 +322,16 @@
         </section>
       </main>
     </div>
+    <dialog id="event-dialog" class="event-dialog">
+      <div class="dialog-heading">
+        <div>
+          <p class="eyebrow">EVIDENCE INSPECTOR</p>
+          <h2 id="event-dialog-title">Capital event</h2>
+        </div>
+        <button id="event-dialog-close" aria-label="Close evidence inspector">Close</button>
+      </div>
+      <div id="event-dialog-content"></div>
+    </dialog>
     <script type="module" src="/app.js"></script>
   </body>
 </html>

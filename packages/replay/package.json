@@ -8,6 +8,7 @@
   },
   "types": "./dist/index.d.ts",
   "dependencies": {
+    "@autonomous-trading-lab/capital-flow": "workspace:*",
     "@autonomous-trading-lab/data-foundation": "workspace:*",
     "@autonomous-trading-lab/domain": "workspace:*",
     "zod": "catalog:"

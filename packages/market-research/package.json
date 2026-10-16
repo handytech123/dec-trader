@@ -9,6 +9,7 @@
   "types": "./dist/index.d.ts",
   "dependencies": {
     "@autonomous-trading-lab/domain": "workspace:*",
-    "decimal.js": "catalog:"
+    "decimal.js": "catalog:",
+    "zod": "catalog:"
   }
 }

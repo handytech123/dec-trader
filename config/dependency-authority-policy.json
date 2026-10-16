@@ -1,0 +1,18 @@
+{
+  "policyVersion": "1",
+  "authority": "READ_ONLY_RESEARCH",
+  "deniedDependencies": [
+    "@coral-xyz/anchor",
+    "@jup-ag/api",
+    "@solana/kit",
+    "@solana/wallet-adapter-base",
+    "@solana/wallet-adapter-react",
+    "@solana/wallet-adapter-wallets",
+    "@solana/web3.js",
+    "ccxt",
+    "ethers",
+    "viem"
+  ],
+  "inertContractPaths": ["packages/execution-contracts/"],
+  "notes": "Denied packages expose signing, wallet, transaction-submission, authenticated exchange-trading, or capital-transfer capability. Additions require an explicit policy review; read-only market and chain clients must use the repository's narrow provider ports."
+}

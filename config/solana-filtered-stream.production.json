@@ -1,0 +1,22 @@
+{
+  "manifestVersion": "1",
+  "description": "Cost-bounded initial Helius filter for bridges, lending and staking. Broad System, token, DEX and per-trade fee accounts are intentionally excluded.",
+  "sources": [
+    {
+      "sourceId": "cfie-curated-capital-flow-v1",
+      "records": [
+        { "address": "worm2ZoG2kUd4vFXhvjh93UUH596ayRfgQ2MgjNMTth" },
+        { "address": "Bridge1p5gheXUvJ6jGWGeCsgPKgnE3YgdGKRVCMY9o" },
+        { "address": "BBbD1WSjbHKfyE3TSFWF6vx1JV51c8msKSQy4ess6pXp" },
+        { "address": "CCTPmbSD7gX1bxKPAmg77w8oFzNFpaQiQUWD43TKaecd" },
+        { "address": "CCTPiPYPc6AsJuwueEnWgSgucamXDZwBd53dQ11YiKX3" },
+        { "address": "CCTPV2Sm4AdWt5296sk4P66VBZ7bEhcARwFaaS9YPbeC" },
+        { "address": "CCTPV2vPZJS2u2BBsUoscuikbYjnpFmbFsvVuJdgUMQe" },
+        { "address": "MarBmsSgKXdrN1egZf5sqe1TMai9K1rChYNDJgjq7aD" },
+        { "address": "jupeiUmn818Jg1ekPURTpr4mFo29p46vygyykFJ3wZC" },
+        { "address": "jup3YeL8QhtSx1e253b2FDvsMNC87fDrgQZivbrndc9" },
+        { "address": "jupr81YtYssSyPt8jbnGuiWon5f6x9TcDEFxYe3Bdzi" }
+      ]
+    }
+  ]
+}

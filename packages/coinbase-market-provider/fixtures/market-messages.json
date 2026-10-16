@@ -1,0 +1,39 @@
+{
+  "snapshot": {
+    "type": "snapshot",
+    "product_id": "SOL-USD",
+    "bids": [["99.00", "2.0"]],
+    "asks": [["101.00", "3.0"]]
+  },
+  "update": {
+    "type": "l2update",
+    "product_id": "SOL-USD",
+    "time": "2026-01-01T00:00:01.000Z",
+    "changes": [
+      ["buy", "100.00", "1.5"],
+      ["sell", "101.00", "0"]
+    ]
+  },
+  "matches": [
+    {
+      "type": "match",
+      "trade_id": 10,
+      "sequence": 50,
+      "time": "2026-01-01T00:00:02.000Z",
+      "product_id": "SOL-USD",
+      "size": "5.25",
+      "price": "100.50",
+      "side": "sell"
+    },
+    {
+      "type": "match",
+      "trade_id": 11,
+      "sequence": 51,
+      "time": "2026-01-01T00:00:03.000Z",
+      "product_id": "SOL-USD",
+      "size": "1.00",
+      "price": "100.25",
+      "side": "buy"
+    }
+  ]
+}

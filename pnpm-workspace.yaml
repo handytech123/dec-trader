@@ -4,6 +4,9 @@ packages:
   - "packages/*"
   - "strategies/*"
 
+overrides:
+  source-map-js: 1.2.2
+
 catalog:
   canonicalize: 5.1.0
   decimal.js: 10.6.0

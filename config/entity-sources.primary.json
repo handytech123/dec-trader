@@ -1,0 +1,200 @@
+{
+  "manifestVersion": "1",
+  "sources": [
+    {
+      "sourceId": "solana-official-terminology",
+      "sourceUrl": "https://solana.com/docs/references/terminology",
+      "records": [
+        {
+          "address": "11111111111111111111111111111111",
+          "entityType": "PROTOCOL",
+          "label": "Solana System Program"
+        }
+      ]
+    },
+    {
+      "sourceId": "wormhole-official-contract-addresses",
+      "sourceUrl": "https://docs.wormhole.com/reference/contract-addresses/",
+      "records": [
+        {
+          "address": "worm2ZoG2kUd4vFXhvjh93UUH596ayRfgQ2MgjNMTth",
+          "entityType": "BRIDGE",
+          "label": "Wormhole Core Bridge"
+        },
+        {
+          "address": "Bridge1p5gheXUvJ6jGWGeCsgPKgnE3YgdGKRVCMY9o",
+          "entityType": "BRIDGE",
+          "label": "Wormhole Token Bridge"
+        }
+      ]
+    },
+    {
+      "sourceId": "allbridge-official-classic-contracts",
+      "sourceUrl": "https://docs.allbridge.io/allbridge-overview/bridge-contracts",
+      "records": [
+        {
+          "address": "BBbD1WSjbHKfyE3TSFWF6vx1JV51c8msKSQy4ess6pXp",
+          "entityType": "BRIDGE",
+          "label": "Allbridge Classic Solana Program"
+        }
+      ]
+    },
+    {
+      "sourceId": "marinade-official-contract-addresses",
+      "sourceUrl": "https://docs.marinade.finance/developers/contract-addresses",
+      "records": [
+        {
+          "address": "MarBmsSgKXdrN1egZf5sqe1TMai9K1rChYNDJgjq7aD",
+          "entityType": "PROTOCOL",
+          "label": "Marinade Liquid Staking Program"
+        }
+      ]
+    },
+    {
+      "sourceId": "jupiter-official-instruction-parser",
+      "sourceUrl": "https://raw.githubusercontent.com/jup-ag/instruction-parser/main/README.md",
+      "records": [
+        {
+          "address": "JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4",
+          "entityType": "PROTOCOL",
+          "label": "Jupiter V6 Aggregator"
+        }
+      ]
+    },
+    {
+      "sourceId": "jupiter-official-lend-addresses",
+      "sourceUrl": "https://raw.githubusercontent.com/jup-ag/docs/main/lend/program-addresses.mdx",
+      "records": [
+        {
+          "address": "jupeiUmn818Jg1ekPURTpr4mFo29p46vygyykFJ3wZC",
+          "entityType": "PROTOCOL",
+          "label": "Jupiter Lend Liquidity"
+        },
+        {
+          "address": "jup3YeL8QhtSx1e253b2FDvsMNC87fDrgQZivbrndc9",
+          "entityType": "PROTOCOL",
+          "label": "Jupiter Lend Earn"
+        },
+        {
+          "address": "jupr81YtYssSyPt8jbnGuiWon5f6x9TcDEFxYe3Bdzi",
+          "entityType": "PROTOCOL",
+          "label": "Jupiter Lend Borrow"
+        }
+      ]
+    },
+    {
+      "sourceId": "raydium-official-library",
+      "sourceUrl": "https://raw.githubusercontent.com/raydium-io/raydium-library/master/README.md",
+      "records": [
+        {
+          "address": "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8",
+          "entityType": "PROTOCOL",
+          "label": "Raydium AMM v4"
+        },
+        {
+          "address": "CPMMoo8L3F4NbTegBCKVNunggL7H1ZpdTHKxQB5qKP1C",
+          "entityType": "PROTOCOL",
+          "label": "Raydium CPMM"
+        },
+        {
+          "address": "CAMMCzo5YL8w4VFF8KVHrK22GGUsp5VTaW7grrKgrWqK",
+          "entityType": "PROTOCOL",
+          "label": "Raydium CLMM"
+        }
+      ]
+    },
+    {
+      "sourceId": "meteora-official-developer-docs",
+      "sourceUrl": "https://raw.githubusercontent.com/MeteoraAg/docs/main/CLAUDE.md",
+      "records": [
+        {
+          "address": "LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo",
+          "entityType": "PROTOCOL",
+          "label": "Meteora DLMM"
+        },
+        {
+          "address": "Eo7WjKq67rjJQSZxS6z3YkapzY3eMj6Xy8X5EQVn5UaB",
+          "entityType": "PROTOCOL",
+          "label": "Meteora DAMM v1"
+        },
+        {
+          "address": "cpamdpZCGKUy5JxQXB4dcpGPiikHawvSWAd6mEn1sGG",
+          "entityType": "PROTOCOL",
+          "label": "Meteora DAMM v2"
+        }
+      ]
+    },
+    {
+      "sourceId": "circle-official-solana-cctp-contracts",
+      "sourceUrl": "https://raw.githubusercontent.com/circlefin/solana-cctp-contracts/master/README.md",
+      "records": [
+        {
+          "address": "CCTPmbSD7gX1bxKPAmg77w8oFzNFpaQiQUWD43TKaecd",
+          "entityType": "BRIDGE",
+          "label": "Circle CCTP Message Transmitter v1"
+        },
+        {
+          "address": "CCTPiPYPc6AsJuwueEnWgSgucamXDZwBd53dQ11YiKX3",
+          "entityType": "BRIDGE",
+          "label": "Circle CCTP Token Messenger Minter v1"
+        },
+        {
+          "address": "CCTPV2Sm4AdWt5296sk4P66VBZ7bEhcARwFaaS9YPbeC",
+          "entityType": "BRIDGE",
+          "label": "Circle CCTP Message Transmitter v2"
+        },
+        {
+          "address": "CCTPV2vPZJS2u2BBsUoscuikbYjnpFmbFsvVuJdgUMQe",
+          "entityType": "BRIDGE",
+          "label": "Circle CCTP Token Messenger Minter v2"
+        }
+      ]
+    },
+    {
+      "sourceId": "pump-official-pumpswap-fee-recipients",
+      "sourceUrl": "https://raw.githubusercontent.com/pump-fun/pump-public-docs/main/docs/PUMP_SWAP_README.md",
+      "records": [
+        {
+          "address": "62qc2CNXwrYqQScmEdiZFFAnJR262PxWEuNQtxfafNgV",
+          "entityType": "PROTOCOL",
+          "label": "PumpSwap Protocol Fee Recipient"
+        },
+        {
+          "address": "7VtfL8fvgNfhz17qKRMjzQEXgbdpnHHHQRh54R9jP2RJ",
+          "entityType": "PROTOCOL",
+          "label": "PumpSwap Protocol Fee Recipient"
+        },
+        {
+          "address": "7hTckgnGnLQR6sdH7YkqFTAA7VwTfYFaZ6EhEsU3saCX",
+          "entityType": "PROTOCOL",
+          "label": "PumpSwap Protocol Fee Recipient"
+        },
+        {
+          "address": "9rPYyANsfQZw3DnDmKE3YCQF5E8oD89UXoHn9JFEhJUz",
+          "entityType": "PROTOCOL",
+          "label": "PumpSwap Protocol Fee Recipient"
+        },
+        {
+          "address": "AVmoTthdrX6tKt4nDjco2D775W2YK3sDhxPcMmzUAmTY",
+          "entityType": "PROTOCOL",
+          "label": "PumpSwap Protocol Fee Recipient"
+        },
+        {
+          "address": "FWsW1xNtWscwNmKv6wVsU1iTzRN6wmmk3MjxRP5tT7hz",
+          "entityType": "PROTOCOL",
+          "label": "PumpSwap Protocol Fee Recipient"
+        },
+        {
+          "address": "G5UZAVbAf46s7cKWoyKu8kYTip9DGTpbLZ2qa9Aq69dP",
+          "entityType": "PROTOCOL",
+          "label": "PumpSwap Protocol Fee Recipient"
+        },
+        {
+          "address": "JCRGumoE9Qi5BBgULTgdgTLjSgkCMSbF62ZZfGs84JeU",
+          "entityType": "PROTOCOL",
+          "label": "PumpSwap Protocol Fee Recipient"
+        }
+      ]
+    }
+  ]
+}

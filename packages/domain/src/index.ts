@@ -3,3 +3,4 @@ export * from "./contracts.js";
 export * from "./identifiers.js";
 export * from "./modes.js";
 export * from "./quantities.js";
+export * from "./runtime-authority.js";

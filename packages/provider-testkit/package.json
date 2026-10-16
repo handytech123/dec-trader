@@ -12,6 +12,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@autonomous-trading-lab/execution-contracts": "workspace:*"
+    "@autonomous-trading-lab/execution-contracts": "workspace:*",
+    "@autonomous-trading-lab/provider-sdk": "workspace:*"
   }
 }
