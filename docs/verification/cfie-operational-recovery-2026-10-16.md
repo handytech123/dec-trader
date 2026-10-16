@@ -31,6 +31,11 @@ collector stopped, the finalized reconciler continued, and the pending count fel
 remaining at zero failed reconciliations. Existing normalization hysteresis remains in force so the
 reconciler pauses above 10,000 pending normalization jobs and resumes at or below 5,000.
 
+The first task restart left pre-restart collector and dashboard descendants orphaned after their
+former supervisor exited. Those stale process trees were identified by parent and command identity
+and stopped. The current supervisor then reacquired the collection lease and restarted one canonical
+collector and dashboard; filtered collection remains paused under backpressure.
+
 This is controlled backlog recovery, not a Phase 3 exit. The system remains `DEGRADED` until the
 pending finalization and normalization queues are reconciled and data completeness is re-measured.
 
