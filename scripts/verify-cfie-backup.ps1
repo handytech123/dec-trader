@@ -1,5 +1,5 @@
 param(
-  [string]$BackupDirectory = "D:\CFIE\backups",
+  [string]$BackupDirectory = "Z:\CFIE\backups",
   [string]$BackupPath
 )
 
@@ -11,12 +11,12 @@ $backupRoot = if ([System.IO.Path]::IsPathRooted($BackupDirectory)) {
   [System.IO.Path]::GetFullPath((Join-Path $workspace $BackupDirectory))
 }
 $workspacePrefix = $workspace.TrimEnd([System.IO.Path]::DirectorySeparatorChar) + [System.IO.Path]::DirectorySeparatorChar
-$approvedExternalRoot = "D:\CFIE\backups"
+$approvedExternalRoot = "Z:\CFIE\backups"
 $approvedExternalPrefix = $approvedExternalRoot + [System.IO.Path]::DirectorySeparatorChar
 if (-not $backupRoot.StartsWith($workspacePrefix, [System.StringComparison]::OrdinalIgnoreCase) -and
     -not $backupRoot.Equals($approvedExternalRoot, [System.StringComparison]::OrdinalIgnoreCase) -and
     -not $backupRoot.StartsWith($approvedExternalPrefix, [System.StringComparison]::OrdinalIgnoreCase)) {
-  throw "Backup directory must remain inside the workspace or D:\CFIE\backups"
+  throw "Backup directory must remain inside the workspace or Z:\CFIE\backups"
 }
 $selected = if ([string]::IsNullOrWhiteSpace($BackupPath)) {
   Get-ChildItem -LiteralPath $backupRoot -Filter "cfie-*.dump" -File |

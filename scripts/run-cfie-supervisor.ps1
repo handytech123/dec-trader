@@ -185,8 +185,21 @@ try {
   $lastEstimatedDaysToCritical = $null
   while ($true) {
     $observedAt = Get-Date
-    $drive = Get-PSDrive -Name ([System.IO.Path]::GetPathRoot($workspace).Substring(0, 1))
-    $freeGiB = [math]::Round($drive.Free / 1GB, 2)
+    $storagePaths = [ordered]@{
+      workspace = $workspace
+      database = "D:\CFIE\PostgreSQL\data"
+      backups = "Z:\CFIE\backups"
+    }
+    $storageVolumes = @($storagePaths.GetEnumerator() | ForEach-Object {
+      $volumeName = [System.IO.Path]::GetPathRoot([string]$_.Value).Substring(0, 1)
+      $volume = Get-PSDrive -Name $volumeName -ErrorAction Stop
+      [pscustomobject][ordered]@{
+        purpose = $_.Key
+        root = $volume.Root
+        freeGiB = [math]::Round($volume.Free / 1GB, 2)
+      }
+    })
+    $freeGiB = [double](($storageVolumes | Measure-Object -Property freeGiB -Minimum).Minimum)
     $storageDrainGiBPerDay = $lastStorageDrainGiBPerDay
     $estimatedDaysToCritical = $lastEstimatedDaysToCritical
     if ($null -eq $forecastBaselineFreeGiB -or $null -eq $forecastBaselineAt) {
@@ -366,6 +379,7 @@ try {
       solanaRpcCredentialConfigured = $solanaRpcCredentialConfigured
       storageStatus = $storageStatus
       storageFreeGiB = $freeGiB
+      storageVolumes = $storageVolumes
       storageWarningFreeGiB = $StorageWarningFreeGiB
       storageCriticalFreeGiB = $StorageCriticalFreeGiB
       storageDrainGiBPerDay = $storageDrainGiBPerDay

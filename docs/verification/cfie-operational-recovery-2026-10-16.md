@@ -54,11 +54,26 @@ next dump. Regression tests cover the corrected directory binding and verified-n
 
 The orphaned archive passed both `pg_restore --list` and a full data-stream decompression check
 before adoption. Its SHA-256 manifest and verification record were regenerated. Older recovery
-points are eligible for capacity-aware pruning only after that verification. The repaired task then
-retained the verified 170 GB archive, pruned the older copies, restored 216.68 GiB of free
-backup-volume capacity, and started a current PostgreSQL custom-format dump. The task remains
-responsible for hashing and full archive/data-stream verification before publishing the new recovery
-point.
+points are eligible for capacity-aware pruning only after that verification. A subsequent dump was
+incorrectly started on `D:` and failed when that volume ran out of space; the failed partial was
+preserved under `Z:\CFIE\backups\failed` for explicit later disposition and is not a recovery point.
+
+## Storage correction — 2026-10-17
+
+Backup and verification defaults now target `Z:\CFIE\backups`. The verified 170 GB archive, its
+manifest, its verification record, the failed 223 GB partial, and the 18.68 GiB relocated backup
+archive were moved from `D:` to `Z:`. The verified archive still has the recorded byte length of
+170,415,849,259, its manifest points to the Z location, and `pg_restore --list` succeeds with 618
+listing lines. The previously recorded SHA-256 remains
+`8424a11a7fc3f0b9c0c283172cb736fef268e9bb4d43dcb191a68650400d652a`.
+
+`Z:` is an SMB mapping to `\\192.168.1.108\Z`, so it is not a safe direct home for this Windows
+PostgreSQL service or the live `.atl-data` runtime. PostgreSQL runs as
+`NT AUTHORITY\NetworkService`, which cannot depend on the interactive user's mapped drive, and a
+directory junction cannot target that network share. The live PostgreSQL data and `.atl-data`
+therefore remain on local `D:` pending a local-volume or engineered database-host migration. The
+supervisor now reports the workspace, database, and backup volumes separately and remains at
+`READ_ONLY_RESEARCH` authority.
 
 ## Remaining gate
 

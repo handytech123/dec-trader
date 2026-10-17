@@ -1,5 +1,5 @@
 param(
-  [string]$OutputDirectory = "D:\CFIE\backups",
+  [string]$OutputDirectory = "Z:\CFIE\backups",
   [string]$Database = "cfie_research",
   [string]$Role = "cfie_app",
   [string]$HostName = "127.0.0.1",
@@ -27,12 +27,12 @@ $backupRoot = if ([System.IO.Path]::IsPathRooted($OutputDirectory)) {
   [System.IO.Path]::GetFullPath((Join-Path $workspace $OutputDirectory))
 }
 $workspacePrefix = $workspace.TrimEnd([System.IO.Path]::DirectorySeparatorChar) + [System.IO.Path]::DirectorySeparatorChar
-$approvedExternalRoot = "D:\CFIE\backups"
+$approvedExternalRoot = "Z:\CFIE\backups"
 $approvedExternalPrefix = $approvedExternalRoot + [System.IO.Path]::DirectorySeparatorChar
 if (-not $backupRoot.StartsWith($workspacePrefix, [System.StringComparison]::OrdinalIgnoreCase) -and
     -not $backupRoot.Equals($approvedExternalRoot, [System.StringComparison]::OrdinalIgnoreCase) -and
     -not $backupRoot.StartsWith($approvedExternalPrefix, [System.StringComparison]::OrdinalIgnoreCase)) {
-  throw "Backup directory must remain inside the workspace or D:\CFIE\backups"
+  throw "Backup directory must remain inside the workspace or Z:\CFIE\backups"
 }
 [System.IO.Directory]::CreateDirectory($backupRoot) | Out-Null
 $backupDrive = Get-PSDrive -Name ([System.IO.Path]::GetPathRoot($backupRoot).Substring(0, 1))

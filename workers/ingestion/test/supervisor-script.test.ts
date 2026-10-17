@@ -28,6 +28,18 @@ describe("Windows supervisor process identity", () => {
     expect(script).not.toContain("ConvertTo-SecureString");
   });
 
+  it("monitors workspace, PostgreSQL, and backup volumes", async () => {
+    // eslint-disable-next-line security/detect-non-literal-fs-filename
+    const script = await readFile(
+      resolve(process.cwd(), "scripts/run-cfie-supervisor.ps1"),
+      "utf8",
+    );
+    expect(script).toContain('database = "D:\\CFIE\\PostgreSQL\\data"');
+    expect(script).toContain('backups = "Z:\\CFIE\\backups"');
+    expect(script).toContain("storageVolumes = $storageVolumes");
+    expect(script).toContain("Measure-Object -Property freeGiB -Minimum");
+  });
+
   it("starts the metered filtered stream only after bounded validation", async () => {
     // eslint-disable-next-line security/detect-non-literal-fs-filename
     const script = await readFile(
@@ -84,5 +96,7 @@ describe("Windows PostgreSQL backup safety", () => {
     expect(script).toContain("latest-verification.json");
     expect(script).toContain("Select-Object -Skip 1");
     expect(script).toContain("newest complete backup is not verified");
+    expect(script).toContain('[string]$OutputDirectory = "Z:\\CFIE\\backups"');
+    expect(script).toContain('$approvedExternalRoot = "Z:\\CFIE\\backups"');
   });
 });
