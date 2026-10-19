@@ -105,6 +105,11 @@ the supervisor every five minutes instead of relying on the week-long collector 
 Each run remains explicitly enabled, capped at 10,000 objects, and audited. Retention defers while a
 PostgreSQL backup is active so backup completion and recoverability take precedence over cleanup.
 
+Filtered reconciliation was increased from 1,000 transactions at four-way parallelism to a bounded
+2,000 transactions at eight-way parallelism after the queue demonstrated zero failures and the
+normalization queue remained below its backpressure threshold. Existing hysteresis continues to
+pause reconciliation if normalization exceeds 10,000 pending jobs and resumes it at 5,000.
+
 The audited seven-day retention command exposed missing protection for newer raw-object foreign keys
 and missing indexes required for bounded deletes. Retention now excludes protected provenance
 objects, and migrations 0064–0065 add all lookup indexes needed by candidate selection and

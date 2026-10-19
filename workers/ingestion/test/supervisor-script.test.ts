@@ -70,6 +70,8 @@ describe("Windows supervisor process identity", () => {
     expect(script).toContain("$FilteredReconciliationIntervalSeconds");
     expect(script).toContain("$FilteredReconciliationBatchSize");
     expect(script).toContain("$FilteredReconciliationParallelBlocks");
+    expect(script).toContain("[int]$FilteredReconciliationBatchSize = 2000");
+    expect(script).toContain("[int]$FilteredReconciliationParallelBlocks = 8");
     expect(script).toContain(
       "$filteredReconciliationDue -and -not $reconciliationBackpressureActive",
     );

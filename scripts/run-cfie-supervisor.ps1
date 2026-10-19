@@ -7,9 +7,9 @@ param(
   [ValidateRange(10, 3600)]
   [int]$FilteredReconciliationIntervalSeconds = 30,
   [ValidateRange(1, 10000)]
-  [int]$FilteredReconciliationBatchSize = 1000,
+  [int]$FilteredReconciliationBatchSize = 2000,
   [ValidateRange(1, 20)]
-  [int]$FilteredReconciliationParallelBlocks = 4,
+  [int]$FilteredReconciliationParallelBlocks = 8,
   [ValidateRange(1, 100)]
   [int]$NormalizationClaimBatchSize = 20,
   [ValidateRange(1, 32)]
