@@ -80,3 +80,32 @@ supervisor now reports the workspace, database, and backup volumes separately an
 Phase 3 remains open until the backlog reaches a reconciled steady state and the seven-day evidence
 window demonstrates complete, fresh data with no critical gaps. Candidate research effects remain
 development-only; the holdout stays sealed and no signal is authorized for live trading.
+
+## Capacity incident — 2026-10-19
+
+The supervisor task had stopped while its collector, derivation, paper-strategy, and dashboard child
+processes continued without supervision. The orphaned trees were stopped by command identity and the
+supervisor was restarted. A stale collection lease expired normally before one replacement collector
+reacquired it; no duplicate collector was started.
+
+The database reached approximately 649 GiB, including 393 GiB of `raw_objects` and 207 GiB of
+`capital_events`. The Solana collector was producing approximately 880,000 capital events per hour
+and 1.4–1.7 GiB of compressed raw payloads per hour. A 300 GiB database-volume reserve now pauses
+the collector, filtered collector, reconciler, and derivation service before the local volume
+reaches an emergency threshold. The dashboard and paper-only strategy service remain available, and
+the supervisor reports the pause explicitly. General forward-outcome and benchmark backfills are
+again capped at zero as previously documented.
+
+The audited seven-day retention command exposed missing protection for newer raw-object foreign keys
+and missing indexes required for bounded deletes. Retention now excludes protected provenance
+objects, and migrations 0064–0065 add all lookup indexes needed by candidate selection and
+foreign-key checks. The corrected command deleted 310,000 expired market frames in 31 audited
+batches without deleting normalized research records.
+
+Three prior failed dumps and one immediate failed retry occupied approximately 646 GiB on the Z
+share without a completion manifest or verification record. Their contents were truncated to one
+byte each, preserving failure filenames while reclaiming the quota. The verified October 12 recovery
+point was not modified. The backup task no longer has an eight-hour execution limit, ignores a new
+schedule while an instance is active, and a clean backup retry was started with high-volume
+ingestion paused. It is not a recovery point until hashing, archive listing, and full data-stream
+verification all pass.

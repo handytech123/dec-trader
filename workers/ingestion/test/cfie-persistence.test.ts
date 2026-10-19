@@ -1076,4 +1076,35 @@ describe("CFIE durable repositories", () => {
       await database.close();
     }
   });
+
+  it("preserves expired raw objects referenced by filtered provenance", async () => {
+    const database = new ResearchDatabase("memory://");
+    try {
+      await database.migrate(
+        fileURLToPath(new URL("../../../infra/postgres/migrations/", import.meta.url)),
+      );
+      const payload = { signature: "protected-filtered-signature", slot: 1 };
+      const rawRef = contentHash(payload);
+      await database.persistFilteredTransaction({
+        providerId: "fixture",
+        filterId: "retention-protection",
+        subscriptionId: 1,
+        signature: payload.signature,
+        slot: String(payload.slot),
+        receivedAt: "2026-01-01T00:00:00.000Z",
+        commitment: "confirmed",
+        parserVersion: 1,
+        payload,
+      });
+      const result = await database.enforceRawRetention(
+        "2026-01-02T00:00:00.000Z",
+        100,
+        "2026-01-02T00:00:01.000Z",
+      );
+      expect(result.objectsDeleted).toBe(0);
+      await expect(database.rawObject(rawRef)).resolves.toBeDefined();
+    } finally {
+      await database.close();
+    }
+  });
 });

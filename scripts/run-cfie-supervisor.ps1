@@ -2,6 +2,8 @@ param(
   [int]$RestartDelaySeconds = 30,
   [int]$StorageWarningFreeGiB = 20,
   [int]$StorageCriticalFreeGiB = 5,
+  [ValidateRange(50, 2000)]
+  [int]$DatabasePauseFreeGiB = 300,
   [ValidateRange(10, 3600)]
   [int]$FilteredReconciliationIntervalSeconds = 30,
   [ValidateRange(1, 10000)]
@@ -199,7 +201,8 @@ try {
         freeGiB = [math]::Round($volume.Free / 1GB, 2)
       }
     })
-    $freeGiB = [double](($storageVolumes | Measure-Object -Property freeGiB -Minimum).Minimum)
+    $databaseFreeGiB = [double](($storageVolumes | Where-Object { $_.purpose -eq "database" } | Select-Object -First 1).freeGiB)
+    $freeGiB = $databaseFreeGiB
     $storageDrainGiBPerDay = $lastStorageDrainGiBPerDay
     $estimatedDaysToCritical = $lastEstimatedDaysToCritical
     if ($null -eq $forecastBaselineFreeGiB -or $null -eq $forecastBaselineAt) {
@@ -227,6 +230,7 @@ try {
     } else {
       "HEALTHY"
     }
+    $ingestionStoragePaused = $databaseFreeGiB -le $DatabasePauseFreeGiB
     try {
       $healthSnapshot = Invoke-RestMethod -Uri "http://127.0.0.1:$($env:ATL_DASHBOARD_PORT)/api/health" -TimeoutSec 5
       $normalizationPending = [int]$healthSnapshot.queue.pending
@@ -245,16 +249,16 @@ try {
       $normalizationPending = $null
       $pendingFilteredReconciliations = $null
     }
-    if ($storageStatus -eq "CRITICAL" -and (Test-CfieProcess $collector "ingestion collect:service")) {
+    if ($ingestionStoragePaused -and (Test-CfieProcess $collector "ingestion collect:service")) {
       Stop-CfieProcessTree -TargetProcessId $collector.Id
     }
-    if ($storageStatus -eq "CRITICAL" -and (Test-CfieProcess $filteredCollector "ingestion observe:filtered-solana")) {
+    if ($ingestionStoragePaused -and (Test-CfieProcess $filteredCollector "ingestion observe:filtered-solana")) {
       Stop-CfieProcessTree -TargetProcessId $filteredCollector.Id
     }
-    if ($storageStatus -eq "CRITICAL" -and (Test-CfieProcess $deriver "ingestion derive:service")) {
+    if ($ingestionStoragePaused -and (Test-CfieProcess $deriver "ingestion derive:service")) {
       Stop-CfieProcessTree -TargetProcessId $deriver.Id
     }
-    if ($storageStatus -ne "CRITICAL" -and -not (Test-CfieProcess $collector "ingestion collect:service")) {
+    if (-not $ingestionStoragePaused -and -not (Test-CfieProcess $collector "ingestion collect:service")) {
       $collector = Start-Process -FilePath $pnpm -WindowStyle Hidden -PassThru -WorkingDirectory $workspace `
         -RedirectStandardOutput (Join-Path $runtimeRoot "collector.stdout.log") `
         -RedirectStandardError (Join-Path $runtimeRoot "collector.stderr.log") `
@@ -273,8 +277,8 @@ try {
           "--max-cycle-failures", "10", "--failure-backoff-seconds", "30",
           "--solana-poll-interval-ms", "1000", "--solana-rpc-min-request-interval-ms", "300",
           "--reference-interval-ms", "10000", "--max-reaction-events-per-window", "5",
-          "--max-general-outcome-events-per-cycle", "50",
-          "--max-general-benchmark-events-per-cycle", "50",
+          "--max-general-outcome-events-per-cycle", "0",
+          "--max-general-benchmark-events-per-cycle", "0",
           "--reaction-snapshot-age-seconds", "60", "--solana-max-batch-slots", "5",
           "--solana-max-parallel-blocks", "1", "--solana-max-live-tail-lag-slots", "500",
           "--normalization-claim-batch-size", ([string]$NormalizationClaimBatchSize),
@@ -287,7 +291,7 @@ try {
     if ($filteredCollectionBackpressureActive -and (Test-CfieProcess $filteredCollector "ingestion observe:filtered-solana")) {
       Stop-CfieProcessTree -TargetProcessId $filteredCollector.Id
     }
-    if ($filteredCollectorDue -and -not $filteredCollectionBackpressureActive -and $storageStatus -ne "CRITICAL" -and -not (Test-CfieProcess $filteredCollector "ingestion observe:filtered-solana")) {
+    if ($filteredCollectorDue -and -not $filteredCollectionBackpressureActive -and -not $ingestionStoragePaused -and -not (Test-CfieProcess $filteredCollector "ingestion observe:filtered-solana")) {
       $lastFilteredCollectorStart = $observedAt
       $filteredCollector = Start-Process -FilePath $pnpm -WindowStyle Hidden -PassThru -WorkingDirectory $workspace `
         -RedirectStandardOutput (Join-Path $runtimeRoot "filtered-collector.stdout.log") `
@@ -307,7 +311,7 @@ try {
     if ($reconciliationBackpressureActive -and (Test-CfieProcess $filteredReconciler "ingestion reconcile:filtered-solana")) {
       Stop-CfieProcessTree -TargetProcessId $filteredReconciler.Id
     }
-    if ($filteredReconciliationDue -and -not $reconciliationBackpressureActive -and $storageStatus -ne "CRITICAL" -and -not (Test-CfieProcess $filteredReconciler "ingestion reconcile:filtered-solana")) {
+    if ($filteredReconciliationDue -and -not $reconciliationBackpressureActive -and -not $ingestionStoragePaused -and -not (Test-CfieProcess $filteredReconciler "ingestion reconcile:filtered-solana")) {
       $lastFilteredReconciliationStart = $observedAt
       $filteredReconciler = Start-Process -FilePath $pnpm -WindowStyle Hidden -PassThru -WorkingDirectory $workspace `
         -RedirectStandardOutput (Join-Path $runtimeRoot "filtered-reconciler.stdout.log") `
@@ -319,7 +323,7 @@ try {
           "--max-parallel-blocks", ([string]$FilteredReconciliationParallelBlocks)
         )
     }
-    if ($storageStatus -ne "CRITICAL" -and -not (Test-CfieProcess $deriver "ingestion derive:service")) {
+    if (-not $ingestionStoragePaused -and -not (Test-CfieProcess $deriver "ingestion derive:service")) {
       $deriver = Start-Process -FilePath $pnpm -WindowStyle Hidden -PassThru -WorkingDirectory $workspace `
         -RedirectStandardOutput (Join-Path $runtimeRoot "deriver.stdout.log") `
         -RedirectStandardError (Join-Path $runtimeRoot "deriver.stderr.log") `
@@ -380,6 +384,9 @@ try {
       storageStatus = $storageStatus
       storageFreeGiB = $freeGiB
       storageVolumes = $storageVolumes
+      databaseFreeGiB = $databaseFreeGiB
+      databasePauseFreeGiB = $DatabasePauseFreeGiB
+      ingestionStoragePaused = $ingestionStoragePaused
       storageWarningFreeGiB = $StorageWarningFreeGiB
       storageCriticalFreeGiB = $StorageCriticalFreeGiB
       storageDrainGiBPerDay = $storageDrainGiBPerDay

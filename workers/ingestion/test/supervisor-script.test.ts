@@ -37,7 +37,12 @@ describe("Windows supervisor process identity", () => {
     expect(script).toContain('database = "D:\\CFIE\\PostgreSQL\\data"');
     expect(script).toContain('backups = "Z:\\CFIE\\backups"');
     expect(script).toContain("storageVolumes = $storageVolumes");
-    expect(script).toContain("Measure-Object -Property freeGiB -Minimum");
+    expect(script).toContain('$_.purpose -eq "database"');
+    expect(script).toContain("databaseFreeGiB = $databaseFreeGiB");
+    expect(script).toContain("ingestionStoragePaused = $ingestionStoragePaused");
+    expect(script).toContain("$databaseFreeGiB -le $DatabasePauseFreeGiB");
+    expect(script).toContain('"--max-general-outcome-events-per-cycle", "0"');
+    expect(script).toContain('"--max-general-benchmark-events-per-cycle", "0"');
   });
 
   it("starts the metered filtered stream only after bounded validation", async () => {
@@ -48,7 +53,7 @@ describe("Windows supervisor process identity", () => {
     );
     expect(script).toContain("helius-enhanced-websocket.enabled");
     expect(script).toContain(
-      '$filteredCollectorDue -and -not $filteredCollectionBackpressureActive -and $storageStatus -ne "CRITICAL"',
+      "$filteredCollectorDue -and -not $filteredCollectionBackpressureActive -and -not $ingestionStoragePaused",
     );
     expect(script).toContain("$filteredCollectorDue = $filteredStreamEnabled -and -not (");
     expect(script).toContain('"--max-bytes", "250000000"');
@@ -98,5 +103,16 @@ describe("Windows PostgreSQL backup safety", () => {
     expect(script).toContain("newest complete backup is not verified");
     expect(script).toContain('[string]$OutputDirectory = "Z:\\CFIE\\backups"');
     expect(script).toContain('$approvedExternalRoot = "Z:\\CFIE\\backups"');
+  });
+
+  it("does not terminate a valid large backup after eight hours", async () => {
+    // eslint-disable-next-line security/detect-non-literal-fs-filename
+    const script = await readFile(
+      resolve(process.cwd(), "scripts/register-cfie-operations.ps1"),
+      "utf8",
+    );
+    expect(script).toContain("$backupSettings");
+    expect(script).toContain("-ExecutionTimeLimit ([TimeSpan]::Zero)");
+    expect(script).not.toContain("-ExecutionTimeLimit (New-TimeSpan -Hours 8)");
   });
 });

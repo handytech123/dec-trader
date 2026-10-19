@@ -7064,6 +7064,30 @@ export class ResearchDatabase {
              WHERE job.raw_object_hash = object.object_hash
                AND job.status IN ('PENDING', 'PROCESSING')
            )
+           AND NOT EXISTS (
+             SELECT 1 FROM solana_token_account_owner_observations AS owner
+             WHERE owner.raw_object_hash = object.object_hash
+           )
+           AND NOT EXISTS (
+             SELECT 1 FROM raw_filtered_transactions AS filtered
+             WHERE filtered.raw_object_hash = object.object_hash
+           )
+           AND NOT EXISTS (
+             SELECT 1 FROM entity_source_snapshots AS snapshot
+             WHERE snapshot.raw_object_hash = object.object_hash
+           )
+           AND NOT EXISTS (
+             SELECT 1 FROM solana_owner_extractions AS extraction
+             WHERE extraction.raw_object_hash = object.object_hash
+           )
+           AND NOT EXISTS (
+             SELECT 1 FROM capital_event_owner_corrections AS correction
+             WHERE correction.raw_object_hash = object.object_hash
+           )
+           AND NOT EXISTS (
+             SELECT 1 FROM filtered_transaction_normalizations AS normalization
+             WHERE normalization.raw_block_hash = object.object_hash
+           )
          ORDER BY object.created_at, object.object_hash
          LIMIT $2
          FOR UPDATE SKIP LOCKED`,

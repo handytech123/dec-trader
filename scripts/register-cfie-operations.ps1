@@ -37,7 +37,7 @@ $backupAction = New-ScheduledTaskAction -Execute $pwsh `
 $backupTrigger = New-ScheduledTaskTrigger -Daily -At $backupAt
 $backupSettings = New-ScheduledTaskSettingsSet -MultipleInstances IgnoreNew -StartWhenAvailable `
   -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries `
-  -ExecutionTimeLimit (New-TimeSpan -Hours 8) -RestartCount 2 -RestartInterval (New-TimeSpan -Minutes 5)
+  -ExecutionTimeLimit ([TimeSpan]::Zero) -RestartCount 2 -RestartInterval (New-TimeSpan -Minutes 5)
 Register-ScheduledTask -TaskName "CFIE Daily PostgreSQL Backup" -Action $backupAction `
   -Trigger $backupTrigger -Settings $backupSettings -Principal $principal -Force | Out-Null
 
