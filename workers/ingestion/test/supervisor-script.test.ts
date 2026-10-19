@@ -44,6 +44,11 @@ describe("Windows supervisor process identity", () => {
     expect(script).toContain("$databaseFreeGiB -le $DatabasePauseFreeGiB");
     expect(script).toContain('"--max-general-outcome-events-per-cycle", "0"');
     expect(script).toContain('"--max-general-benchmark-events-per-cycle", "0"');
+    expect(script).toContain("[int]$RetentionIntervalSeconds = 300");
+    expect(script).toContain('Get-Process -Name "pg_dump"');
+    expect(script).toContain('"retention:prune"');
+    expect(script).toContain('"--retention-days", "7", "--maximum-objects", "10000"');
+    expect(script).toContain("retentionDeferredForBackup = $retentionDue -and $backupRunning");
   });
 
   it("starts the metered filtered stream only after bounded validation", async () => {

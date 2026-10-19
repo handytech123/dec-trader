@@ -13,7 +13,9 @@ param(
   [ValidateRange(1, 100)]
   [int]$NormalizationClaimBatchSize = 20,
   [ValidateRange(1, 32)]
-  [int]$NormalizationParallelJobs = 8
+  [int]$NormalizationParallelJobs = 8,
+  [ValidateRange(60, 86400)]
+  [int]$RetentionIntervalSeconds = 300
 )
 
 $ErrorActionPreference = "Stop"
@@ -156,8 +158,10 @@ try {
   $dashboard = $null
   $research = $null
   $enrichment = $null
+  $retention = $null
   $lastResearchStart = $null
   $lastEnrichmentStart = $null
+  $lastRetentionStart = $null
   $lastFilteredReconciliationStart = $null
   $lastFilteredCollectorStart = $null
   $reconciliationBackpressureActive = $false
@@ -172,6 +176,9 @@ try {
       $previousStatus = Get-Content -LiteralPath $previousStatusPath -Raw | ConvertFrom-Json
       if ($null -ne $previousStatus.lastEnrichmentStart) {
         $lastEnrichmentStart = [DateTime]::Parse($previousStatus.lastEnrichmentStart)
+      }
+      if ($null -ne $previousStatus.lastRetentionStart) {
+        $lastRetentionStart = [DateTime]::Parse($previousStatus.lastRetentionStart)
       }
       if ($null -ne $previousStatus.normalizationPending) {
         $normalizationPending = [int]$previousStatus.normalizationPending
@@ -376,6 +383,21 @@ try {
           "scripts\run-cfie-nansen-enrichment.ps1"
         )
     }
+    $retentionDue = $null -eq $lastRetentionStart -or (
+      ($observedAt - $lastRetentionStart).TotalSeconds -ge $RetentionIntervalSeconds
+    )
+    $backupRunning = $null -ne (Get-Process -Name "pg_dump" -ErrorAction SilentlyContinue)
+    if ($retentionDue -and -not $backupRunning -and -not (Test-CfieProcess $retention "ingestion retention:prune")) {
+      $lastRetentionStart = $observedAt
+      $retention = Start-Process -FilePath $pnpm -WindowStyle Hidden -PassThru -WorkingDirectory $workspace `
+        -RedirectStandardOutput (Join-Path $runtimeRoot "retention.stdout.log") `
+        -RedirectStandardError (Join-Path $runtimeRoot "retention.stderr.log") `
+        -ArgumentList @(
+          "--filter", "@autonomous-trading-lab/ingestion", "retention:prune", "--",
+          "--enable-retention-prune", "--database-path", ".atl-data/research-db",
+          "--retention-days", "7", "--maximum-objects", "10000"
+        )
+    }
     $status = [ordered]@{
       observedAt = $observedAt.ToUniversalTime().ToString("o")
       authority = "READ_ONLY_RESEARCH"
@@ -423,6 +445,11 @@ try {
       enrichmentPid = if ($null -eq $enrichment) { $null } else { $enrichment.Id }
       enrichmentRunning = Test-CfieProcess $enrichment "run-cfie-nansen-enrichment\.ps1"
       lastEnrichmentStart = if ($null -eq $lastEnrichmentStart) { $null } else { $lastEnrichmentStart.ToUniversalTime().ToString("o") }
+      retentionPid = if ($null -eq $retention) { $null } else { $retention.Id }
+      retentionRunning = Test-CfieProcess $retention "ingestion retention:prune"
+      retentionDeferredForBackup = $retentionDue -and $backupRunning
+      retentionIntervalSeconds = $RetentionIntervalSeconds
+      lastRetentionStart = if ($null -eq $lastRetentionStart) { $null } else { $lastRetentionStart.ToUniversalTime().ToString("o") }
     }
     Write-CfieJsonAtomically -Value $status -DestinationPath (Join-Path $runtimeRoot "status.json")
     Start-Sleep -Seconds $RestartDelaySeconds
@@ -439,7 +466,8 @@ try {
     @{ Process = $strategyBot; Pattern = "strategy-worker start" },
     @{ Process = $dashboard; Pattern = "@autonomous-trading-lab/dashboard start" },
     @{ Process = $research; Pattern = "ingestion research:run" },
-    @{ Process = $enrichment; Pattern = "run-cfie-nansen-enrichment\.ps1" }
+    @{ Process = $enrichment; Pattern = "run-cfie-nansen-enrichment\.ps1" },
+    @{ Process = $retention; Pattern = "ingestion retention:prune" }
   )
   foreach ($managed in $managedProcesses) {
     if (Test-CfieProcess $managed.Process $managed.Pattern) {

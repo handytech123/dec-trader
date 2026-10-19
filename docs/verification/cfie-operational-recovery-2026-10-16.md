@@ -100,6 +100,11 @@ On October 19, 2026, the operator lowered this ingestion pause reserve to 100 Gi
 continues to fail closed at or below that threshold and reports the configured reserve in its status
 document.
 
+The same follow-up corrected retention cadence. Bounded seven-day raw retention is now scheduled by
+the supervisor every five minutes instead of relying on the week-long collector process to exit.
+Each run remains explicitly enabled, capped at 10,000 objects, and audited. Retention defers while a
+PostgreSQL backup is active so backup completion and recoverability take precedence over cleanup.
+
 The audited seven-day retention command exposed missing protection for newer raw-object foreign keys
 and missing indexes required for bounded deletes. Retention now excludes protected provenance
 objects, and migrations 0064–0065 add all lookup indexes needed by candidate selection and
