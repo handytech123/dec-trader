@@ -3,7 +3,7 @@ param(
   [int]$StorageWarningFreeGiB = 20,
   [int]$StorageCriticalFreeGiB = 5,
   [ValidateRange(50, 2000)]
-  [int]$DatabasePauseFreeGiB = 300,
+  [int]$DatabasePauseFreeGiB = 100,
   [ValidateRange(10, 3600)]
   [int]$FilteredReconciliationIntervalSeconds = 30,
   [ValidateRange(1, 10000)]

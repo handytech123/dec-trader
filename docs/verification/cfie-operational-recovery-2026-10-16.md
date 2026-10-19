@@ -96,6 +96,10 @@ reaches an emergency threshold. The dashboard and paper-only strategy service re
 the supervisor reports the pause explicitly. General forward-outcome and benchmark backfills are
 again capped at zero as previously documented.
 
+On October 19, 2026, the operator lowered this ingestion pause reserve to 100 GiB. The supervisor
+continues to fail closed at or below that threshold and reports the configured reserve in its status
+document.
+
 The audited seven-day retention command exposed missing protection for newer raw-object foreign keys
 and missing indexes required for bounded deletes. Retention now excludes protected provenance
 objects, and migrations 0064–0065 add all lookup indexes needed by candidate selection and

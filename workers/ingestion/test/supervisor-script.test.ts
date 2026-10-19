@@ -39,6 +39,7 @@ describe("Windows supervisor process identity", () => {
     expect(script).toContain("storageVolumes = $storageVolumes");
     expect(script).toContain('$_.purpose -eq "database"');
     expect(script).toContain("databaseFreeGiB = $databaseFreeGiB");
+    expect(script).toContain("[int]$DatabasePauseFreeGiB = 100");
     expect(script).toContain("ingestionStoragePaused = $ingestionStoragePaused");
     expect(script).toContain("$databaseFreeGiB -le $DatabasePauseFreeGiB");
     expect(script).toContain('"--max-general-outcome-events-per-cycle", "0"');
