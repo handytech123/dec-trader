@@ -201,14 +201,19 @@ try {
     }
     $storageVolumes = @($storagePaths.GetEnumerator() | ForEach-Object {
       $volumeName = [System.IO.Path]::GetPathRoot([string]$_.Value).Substring(0, 1)
-      $volume = Get-PSDrive -Name $volumeName -ErrorAction Stop
+      $volume = Get-PSDrive -Name $volumeName -ErrorAction SilentlyContinue
       [pscustomobject][ordered]@{
         purpose = $_.Key
-        root = $volume.Root
-        freeGiB = [math]::Round($volume.Free / 1GB, 2)
+        root = if ($null -eq $volume) { [System.IO.Path]::GetPathRoot([string]$_.Value) } else { $volume.Root }
+        available = $null -ne $volume
+        freeGiB = if ($null -eq $volume) { $null } else { [math]::Round($volume.Free / 1GB, 2) }
       }
     })
-    $databaseFreeGiB = [double](($storageVolumes | Where-Object { $_.purpose -eq "database" } | Select-Object -First 1).freeGiB)
+    $databaseVolume = $storageVolumes | Where-Object { $_.purpose -eq "database" } | Select-Object -First 1
+    if ($null -eq $databaseVolume -or -not $databaseVolume.available) {
+      throw "The PostgreSQL data volume is unavailable"
+    }
+    $databaseFreeGiB = [double]$databaseVolume.freeGiB
     $freeGiB = $databaseFreeGiB
     $storageDrainGiBPerDay = $lastStorageDrainGiBPerDay
     $estimatedDaysToCritical = $lastEstimatedDaysToCritical
@@ -386,7 +391,9 @@ try {
     $retentionDue = $null -eq $lastRetentionStart -or (
       ($observedAt - $lastRetentionStart).TotalSeconds -ge $RetentionIntervalSeconds
     )
-    $backupRunning = $null -ne (Get-Process -Name "pg_dump" -ErrorAction SilentlyContinue)
+    $backupTask = Get-ScheduledTask -TaskName "CFIE Daily PostgreSQL Backup" -ErrorAction SilentlyContinue
+    $backupRunning = ($null -ne $backupTask -and $backupTask.State -eq "Running") -or
+      $null -ne (Get-Process -Name "pg_dump", "pg_restore" -ErrorAction SilentlyContinue)
     if ($retentionDue -and -not $backupRunning -and -not (Test-CfieProcess $retention "ingestion retention:prune")) {
       $lastRetentionStart = $observedAt
       $retention = Start-Process -FilePath $pnpm -WindowStyle Hidden -PassThru -WorkingDirectory $workspace `

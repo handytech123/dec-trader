@@ -110,6 +110,11 @@ Filtered reconciliation was increased from 1,000 transactions at four-way parall
 normalization queue remained below its backpressure threshold. Existing hysteresis continues to
 pause reconciliation if normalization exceeds 10,000 pending jobs and resumes it at 5,000.
 
+Backup-aware retention now covers the complete scheduled backup lifecycle, including hashing and
+archive verification after `pg_dump` exits. A temporarily unavailable backup share is reported in
+volume telemetry without terminating supervision; loss of the local PostgreSQL data volume remains a
+fail-closed supervisor error.
+
 The audited seven-day retention command exposed missing protection for newer raw-object foreign keys
 and missing indexes required for bounded deletes. Retention now excludes protected provenance
 objects, and migrations 0064–0065 add all lookup indexes needed by candidate selection and
